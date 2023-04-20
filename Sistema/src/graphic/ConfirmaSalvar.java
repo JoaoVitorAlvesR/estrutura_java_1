@@ -14,8 +14,6 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JCheckBox;
-import javax.swing.JEditorPane;
 import java.awt.Font;
 
 public class ConfirmaSalvar extends JFrame {
