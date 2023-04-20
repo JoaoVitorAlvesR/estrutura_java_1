@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLayeredPane;
 
-public class MenuWindow {
+public class MenuWindow extends JFrame{
 	
 	private JMenuBar mBar;
-	private JMenu mSistema, mCadastro, mFinanceiro;
+	private JMenu mSistema, mCadastro, mFinanceiro, mBackup;
 	private JMenuItem mCerteza, mSairSim, mSairNao, mCadastroUsuario, mCadastroAlunos, mCadastroModalidade;
 	private Connection conn;
 	
@@ -28,7 +28,6 @@ public class MenuWindow {
 		
 		mBar = new JMenuBar();
 			mSistema = new JMenu("Sair");
-				
 				mCerteza = new JMenuItem("Tem Certeza?");
 				mSairSim = new JMenuItem("Sim");
 				mSairSim.setAction(new AbstractAction("Sim") {
@@ -40,10 +39,27 @@ public class MenuWindow {
 				});
 				mSairNao = new JMenuItem("Não");
 			
-			mSistema.add(mCerteza);
-			mCerteza.setEnabled(false);
-			mSistema.add(mSairSim);
-			mSistema.add(mSairNao);
+				mSistema.add(mCerteza);
+				mSistema.add(mSairSim);
+				mSistema.add(mSairNao);
+				mCerteza.setEnabled(false);
+			
+			mBackup = new JMenu("Backup");
+				mCerteza = new JMenuItem("Realizar Backup?");
+				mSairSim = new JMenuItem("Sim");
+				mSairSim.setAction(new AbstractAction("Sim") {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+					}});
+				mSairNao = new JMenuItem("Não");
+				
+				mBackup.add(mCerteza);
+				mBackup.add(mSairSim);
+				mBackup.add(mSairNao);
+				mCerteza.setEnabled(false);
 			
 			mCadastro = new JMenu("Cadastro");
 				mCadastroUsuario = new JMenuItem("Usuário");
@@ -60,11 +76,21 @@ public class MenuWindow {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new CadastroAlunos(conn).setVisible(true);;
+						new CadastroAlunos(conn).setVisible(true);
 						
 					}
 				});
+				
 				mCadastroModalidade = new JMenuItem("Modalidades");
+				mCadastroModalidade.setAction(new AbstractAction("Modalidades") {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						new CadastroModalidades(conn).setVisible(true);
+						
+					}
+				});
+				
 			if(perfil.equals("Administrador")) {
 				mCadastro.add(mCadastroUsuario);
 			}
@@ -74,6 +100,9 @@ public class MenuWindow {
 			mFinanceiro = new JMenu("Financeiro");
 			
 		mBar.add(mSistema);
+		if(perfil.equals("Administrador")) {
+			mBar.add(mBackup);
+		}
 		mBar.add(mCadastro);
 		mBar.add(mFinanceiro);
 		
@@ -83,7 +112,7 @@ public class MenuWindow {
 		frame.setVisible(true);
 	}
 
-	protected void dispose() {
+	public void dispose() {
 		// TODO Auto-generated method stub
 		
 	}
