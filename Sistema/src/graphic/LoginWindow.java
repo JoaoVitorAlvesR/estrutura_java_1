@@ -11,7 +11,6 @@ import javax.swing.border.EmptyBorder;
 
 import database.dao.UsuarioDAO;
 import database.model.Usuario;
-import main.Start;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
