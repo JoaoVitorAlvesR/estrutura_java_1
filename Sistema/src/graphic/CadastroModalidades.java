@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.sql.Connection;
 
 import javax.swing.JScrollPane;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
@@ -33,6 +34,24 @@ public class CadastroModalidades extends JFrame {
 		getContentPane().setLayout(gridBagLayout);
 		
 		JButton btnNewButton = new JButton("Salvar");
+		btnNewButton.setAction(new AbstractAction() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					//==========================================//
+					//											//
+					//	PREENCHER PRA SALVAR NO BANCO DE DADOS	//
+					//											//
+					//==========================================//
+				} catch (Exception e1) {
+					// TODO: handle exception
+					e1.printStackTrace();
+					new ErrorDialog().setVisible(true);
+				}
+				new ConfirmaSalvar().setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton.gridwidth = 2;
