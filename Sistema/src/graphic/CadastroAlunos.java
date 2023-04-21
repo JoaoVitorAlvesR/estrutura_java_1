@@ -105,7 +105,9 @@ public class CadastroAlunos extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					new ErrorDialog().setVisible(true);
 				}
+				new ConfirmaSalvar().setVisible(true);
 			}
 		});
 		

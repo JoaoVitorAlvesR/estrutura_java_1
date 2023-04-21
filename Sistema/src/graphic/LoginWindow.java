@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class LoginWindow extends JDialog {
 
@@ -30,6 +31,7 @@ public class LoginWindow extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 	private Connection conn;
+	private JPasswordField passwordField;
 
 	public LoginWindow(Connection conn) {
 		
@@ -41,7 +43,7 @@ public class LoginWindow extends JDialog {
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{50, 75, 25, 100, 0};
 		gbl_contentPanel.rowHeights = new int[]{30, 30, 30, 30, 30, 0};
-		gbl_contentPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWeights = new double[]{1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
@@ -74,7 +76,7 @@ public class LoginWindow extends JDialog {
 			contentPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		}
 		{
-			textField_1 = new JTextField();
+			textField_1 = new JPasswordField();
 			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 			gbc_textField_1.gridwidth = 3;
 			gbc_textField_1.insets = new Insets(0, 0, 5, 0);

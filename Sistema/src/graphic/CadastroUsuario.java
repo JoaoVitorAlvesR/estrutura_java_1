@@ -85,7 +85,9 @@ public class CadastroUsuario extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					new ErrorDialog().setVisible(true);
 				}
+				new ConfirmaSalvar().setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnCriarUsurio = new GridBagConstraints();
