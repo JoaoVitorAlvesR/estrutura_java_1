@@ -22,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class CadastroUsuario extends JFrame {
@@ -31,7 +32,6 @@ public class CadastroUsuario extends JFrame {
 	private JTextField textField_1;
 	private Connection conn;
 
-	
 	public CadastroUsuario(Connection conn) {
 		this.conn = conn;
 		
@@ -49,6 +49,7 @@ public class CadastroUsuario extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"- Selecione -"}));
 		comboBox.addItem("Atendente");
 		comboBox.addItem("Professor");
 		comboBox.addItem("Financeiro");
