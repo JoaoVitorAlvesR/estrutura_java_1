@@ -34,7 +34,7 @@ public class CadastroModalidades extends JFrame {
 		getContentPane().setLayout(gridBagLayout);
 		
 		JButton btnNewButton = new JButton("Salvar");
-		btnNewButton.setAction(new AbstractAction() {
+		btnNewButton.setAction(new AbstractAction("Salvar") {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
