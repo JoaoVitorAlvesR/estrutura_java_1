@@ -12,6 +12,8 @@ import javax.swing.JMenuItem;
 
 import database.dao.UsuarioDAO;
 import database.model.Usuario;
+import util.BackupUtil;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLayeredPane;
@@ -53,7 +55,7 @@ public class MenuWindow extends JFrame{
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
+						BackupUtil.makeBackup();
 						
 					}});
 				mSairNao = new JMenuItem("Não");
