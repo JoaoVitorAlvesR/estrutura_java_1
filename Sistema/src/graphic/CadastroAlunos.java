@@ -3,6 +3,7 @@ package graphic;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -24,7 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class CadastroAlunos extends JFrame {
+public class CadastroAlunos extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField txtAluno;
@@ -443,6 +444,10 @@ public class CadastroAlunos extends JFrame {
 		gbc_txtObservacao.gridx = 1;
 		gbc_txtObservacao.gridy = 18;
 		contentPane.add(txtObservacao, gbc_txtObservacao);
-		txtObservacao.setColumns(10);		
+		txtObservacao.setColumns(10);	
+		setIconifiable(true);
+		setClosable(true);
+		setVisible(true);
+		setTitle("Cadastro de Alunos");
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.sql.Connection;
 
 import javax.swing.AbstractAction;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -20,6 +21,7 @@ public class MenuWindow extends JFrame{
 	private JMenuBar mBar;
 	private JMenu mSistema, mCadastro, mFinanceiro, mBackup;
 	private JMenuItem mCerteza, mSairSim, mSairNao, mCadastroUsuario, mCadastroAlunos, mCadastroModalidade;
+	private JDesktopPane desktop;
 	private Connection conn;
 	
 	public MenuWindow(Connection conn, String perfil) {
@@ -76,7 +78,8 @@ public class MenuWindow extends JFrame{
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new CadastroAlunos(conn).setVisible(true);
+						CadastroAlunos caluno =  new CadastroAlunos(conn);
+						desktop.add(caluno);
 						
 					}
 				});
@@ -106,8 +109,11 @@ public class MenuWindow extends JFrame{
 		mBar.add(mCadastro);
 		mBar.add(mFinanceiro);
 		
+		desktop = new JDesktopPane();
+		
 		JFrame frame = new JFrame();
-		frame.setSize(700, 700);
+		frame.setContentPane(desktop);
+		frame.setExtendedState(MAXIMIZED_BOTH);
 		frame.setJMenuBar(mBar);
 		frame.setVisible(true);
 	}
