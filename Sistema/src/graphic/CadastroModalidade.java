@@ -109,7 +109,7 @@ public class CadastroModalidade extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setVisible(true);
-		setTitle("Cadastro de Alunos");
+		setTitle("Cadastro de Modalidades");
 	}
 
 }
