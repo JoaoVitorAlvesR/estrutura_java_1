@@ -84,7 +84,7 @@ public class CadastroAlunos extends JInternalFrame {
 				try {
 					AlunoDAO dao = new AlunoDAO(conn);
 					Aluno a = new Aluno();
-					a.setAluno(txtAluno.getText());
+					a.setAluno(txtAluno.getText().isEmpty()?null:txtAluno.getText());
 					a.setData_nascimento(txtDataNascimento.getText());
 					a.setSexo(txtSexo.getText());
 					System.out.println(txtSexo.getText());
@@ -103,12 +103,13 @@ public class CadastroAlunos extends JInternalFrame {
 					a.setCpf(txtCpf.getText());
 					
 					dao.Insert(a);
+					new ConfirmaSalvar().setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-					new ErrorDialog().setVisible(true);
+					new ErrorDialog("colunas obrigatórias sendo enviadas vazias").setVisible(true);
 				}
-				new ConfirmaSalvar().setVisible(true);
+				
 			}
 		});
 		
@@ -131,6 +132,47 @@ public class CadastroAlunos extends JInternalFrame {
 		contentPane.add(btnNewButton_2, gbc_btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Salvar");
+		btnNewButton_3.setAction(new AbstractAction("Salvar") {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					AlunoDAO dao = new AlunoDAO(conn);
+					Aluno a = new Aluno();
+					a.setAluno(txtAluno.getText().isEmpty()?null:txtAluno.getText());
+					a.setData_nascimento(txtDataNascimento.getText());
+					a.setSexo(txtSexo.getText());
+					System.out.println(txtSexo.getText());
+					a.setTelefone(txtTelefone.getText());
+					a.setCelular(txtCelular.getText());
+					a.setEmail(txtEmail.getText());
+					a.setObservacao(txtObservacao.getText());
+					a.setEndereco(txtEndereco.getText());
+					a.setNumero(txtNumero.getText());
+					a.setComplemento(txtComplemento.getText());
+					a.setBairro(txtBairro.getText());
+					a.setCidade(txtCidade.getText());
+					a.setEstado(txtEstado.getText());
+					a.setPais(txtPais.getText());
+					a.setCep(txtCep.getText());
+					a.setCpf(txtCpf.getText());
+					
+					dao.Insert(a);
+					new ConfirmaSalvar().setVisible(true);
+					dispose();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					new ErrorDialog("colunas obrigatórias sendo enviadas vazias").setVisible(true);
+				}
+				
+				
+				
+			}
+		});
+		
+		
+		
 		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
 		gbc_btnNewButton_3.gridwidth = 2;
 		gbc_btnNewButton_3.fill = GridBagConstraints.HORIZONTAL;
