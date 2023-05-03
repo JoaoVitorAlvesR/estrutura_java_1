@@ -18,9 +18,9 @@ public class ErrorDialog extends JFrame {
 
 	private JPanel contentPane;
 
-	public ErrorDialog() {
+	public ErrorDialog(String error) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 240, 180);
+		setBounds(100, 100, 320, 180);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -41,7 +41,7 @@ public class ErrorDialog extends JFrame {
 		gbc_lblErro.gridy = 0;
 		contentPane.add(lblErro, gbc_lblErro);
 		
-		JLabel lblNewLabel = new JLabel("error message here");
+		JLabel lblNewLabel = new JLabel(error);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.VERTICAL;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);

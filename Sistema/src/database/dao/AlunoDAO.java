@@ -13,8 +13,8 @@ public class AlunoDAO extends AbstractDAO {
 	private String selectWhereCommand = "select * from public.alunos where aluno = '?'";
 
 	private String insertCommand = 
-			"INSERT INTO alunos(aluno, sexo, telefone, cpf, celular, email, observacao, endereco, numero, complemento, bairro, cidade, estado, pais, cep, data_nascimento) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		    "INSERT INTO alunos(aluno, sexo, telefone, cpf, celular, email, observacao, endereco, numero, complemento, bairro, cidade, estado, pais, cep, data_nascimento) "
+		    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private PreparedStatement pstSelect;
 	private PreparedStatement pstSelectWhere;
@@ -42,6 +42,7 @@ public class AlunoDAO extends AbstractDAO {
 	@Override
 	public void Insert(Object param) throws SQLException {
 		Aluno a = (Aluno)param;
+		
 		pstInsert.setString(1, a.getAluno());
 		pstInsert.setString(2, a.getSexo());
 		pstInsert.setString(3, a.getTelefone());

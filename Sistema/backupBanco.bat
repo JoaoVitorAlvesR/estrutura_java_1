@@ -5,4 +5,4 @@ start pg_dump -h localhost -p 5432 -U %1 -w -F c -b -v -f %3 sistema
 set path=%path_old%
 set path_old=
 set PGPASSWORD=
-exit
+pause

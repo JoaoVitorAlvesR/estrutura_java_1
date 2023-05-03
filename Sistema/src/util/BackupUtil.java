@@ -9,12 +9,12 @@ public class BackupUtil {
 		
 		boolean runProcess = true;
 	
-	File diretorio = new File("./Backup");
+	File diretorio = new File("./backup");
 	if(!diretorio.isDirectory()) {
 		diretorio.mkdir();
 	}
 	
-	String path = "./Backup/Sistema.dmp";
+	String path = "./backup/sistema.dmp";
 	File arquivoBackup = new File(path);
 	
 	if(arquivoBackup.isFile()) {
@@ -27,9 +27,8 @@ public class BackupUtil {
 	
 	if(runProcess) {
 		if(new File("./backupBanco.bat").isFile()) {
-			Process process;
 			try {
-				process = Runtime.getRuntime().exec("./backupBanco.bat progress 12345 " +path);
+				Process process = Runtime.getRuntime().exec("./backupBanco.bat postgres 12345 ./backup/sistema.dmp");
 				process.waitFor();
 				int codigo = process.exitValue();
 				if(codigo == 0) {
