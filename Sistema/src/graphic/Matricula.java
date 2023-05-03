@@ -3,6 +3,7 @@ package graphic;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
@@ -24,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
-public class Matricula extends JFrame {
+public class Matricula extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -159,6 +160,13 @@ public class Matricula extends JFrame {
 		contentPane.add(comboBox, gbc_comboBox);
 		
 		JButton btnNewButton_1 = new JButton("Modalidade");
+		btnNewButton_1.setAction(new AbstractAction("Modalidade") {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AdicionarModalidade(conn).setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.gridwidth = 2;
 		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
@@ -174,6 +182,11 @@ public class Matricula extends JFrame {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 6;
 		contentPane.add(scrollPane, gbc_scrollPane);
+		
+		setIconifiable(true);
+		setClosable(true);
+		setVisible(true);
+		setTitle("Matricula");
 	}
 
 }

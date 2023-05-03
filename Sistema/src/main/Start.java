@@ -13,7 +13,7 @@ public class Start {
 	public static void main(String[] args) {
 		
 		try {
-			Connection conn = ConnectionFactory.getConnection("localhost", "5432", "postgres", "postgres", "12345");
+			Connection conn = ConnectionFactory.getConnection("localhost", "5432", "sistema", "postgres", "12345");
 			if (conn != null) {
 				
 				new LoginWindow(conn).setVisible(true);
