@@ -25,7 +25,7 @@ public class MenuWindow extends JFrame{
 	
 	private JMenuBar mBar;
 	private JMenu mSistema, mCadastro, mFinanceiro, mBackup;
-	private JMenuItem mCerteza, mSairSim, mSairNao, mCadastroUsuario, mCadastroAlunos, mCadastroModalidade;
+	private JMenuItem mCerteza, mSairSim, mSairNao, mCadastroUsuario, mCadastroAlunos, mCadastroModalidade, mCadastroMatricula;
 	private JDesktopPane desktop;
 	private Connection conn;
 	
@@ -100,11 +100,22 @@ public class MenuWindow extends JFrame{
 					}
 				});
 				
+				mCadastroMatricula = new JMenuItem("Matrícula");
+				mCadastroMatricula.setAction(new AbstractAction("Matrícula") {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Matricula cmatricula = new Matricula(conn);
+						desktop.add(cmatricula);						
+					}
+				});
+				
 			if(perfil.equals("Administrador")) {
 				mCadastro.add(mCadastroUsuario);
 			}
 			mCadastro.add(mCadastroAlunos);
 			mCadastro.add(mCadastroModalidade);
+			mCadastro.add(mCadastroMatricula);
 			
 			mFinanceiro = new JMenu("Financeiro");
 			
