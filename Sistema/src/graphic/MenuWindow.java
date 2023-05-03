@@ -91,8 +91,8 @@ public class MenuWindow extends JFrame{
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new CadastroModalidades(conn).setVisible(true);
-						
+						CadastroModalidade cmodalidade = new CadastroModalidade(conn);
+						desktop.add(cmodalidade);
 					}
 				});
 				
