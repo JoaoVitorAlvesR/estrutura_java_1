@@ -47,7 +47,7 @@ public class CadastroModalidades extends JFrame {
 				} catch (Exception e1) {
 					// TODO: handle exception
 					e1.printStackTrace();
-					new ErrorDialog().setVisible(true);
+					new ErrorDialog("").setVisible(true);
 				}
 				new ConfirmaSalvar().setVisible(true);
 			}
