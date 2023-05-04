@@ -9,11 +9,18 @@ import javax.swing.JPanel;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import database.dao.ModalidadeDAO;
+import database.model.Modalidade;
+
 import javax.swing.JComboBox;
+import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
@@ -23,11 +30,14 @@ public class CadastroModalidade extends JInternalFrame {
 	private JTextField textField_2;
 	private Connection conn;
 
+
 	public CadastroModalidade(Connection conn) {
 		this.conn = conn;
 		setBounds(100, 100, 290, 185);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		JComboBox<Integer> comboBox = new JComboBox<Integer>();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{115, 70, 80, 0};
@@ -37,6 +47,29 @@ public class CadastroModalidade extends JInternalFrame {
 		getContentPane().setLayout(gridBagLayout);
 		
 		JButton btnNewButton = new JButton("Adicionar");
+		
+		btnNewButton.setAction(new AbstractAction("Adicionar") {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					ModalidadeDAO dao = new ModalidadeDAO(conn);
+					Modalidade m = new Modalidade();
+					m.setModalidade(textField.getText().isEmpty()?null:textField.getText());
+					m.setFrequencia(comboBox.getSelectedIndex() == 0 ? null:comboBox.getSelectedIndex());
+					m.setValorMensal(Double.parseDouble(textField_2.getText()));
+					
+					dao.Insert(m);
+					new ConfirmaSalvar().setVisible(true);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					new ErrorDialog("").setVisible(true);
+				}
+			}
+		});
+		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 2;
 		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
@@ -54,13 +87,13 @@ public class CadastroModalidade extends JInternalFrame {
 		gbc_lblNewLabel.gridy = 3;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"- Selecione -"}));
-		comboBox.addItem("1 Aula");
-		comboBox.addItem("2 Aulas");
-		comboBox.addItem("3 Aulas");
-		comboBox.addItem("4 Aulas");
-		comboBox.addItem("5 Aulas");
+		comboBox.addItem(1);
+		comboBox.addItem(2);
+		comboBox.addItem(3);
+		comboBox.addItem(4);
+		comboBox.addItem(5);
 		
 		textField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();

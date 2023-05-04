@@ -83,12 +83,12 @@ public class CadastroUsuario extends JFrame {
 					u.setPerfil(comboBox.getSelectedItem().toString());
 		
 					dao.Insert(u);
+					new ConfirmaSalvar().setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 					new ErrorDialog("").setVisible(true);
 				}
-				new ConfirmaSalvar().setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnCriarUsurio = new GridBagConstraints();

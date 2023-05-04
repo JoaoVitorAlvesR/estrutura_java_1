@@ -109,7 +109,6 @@ public class CadastroAlunos extends JInternalFrame {
 					e1.printStackTrace();
 					new ErrorDialog("colunas obrigatórias sendo enviadas vazias").setVisible(true);
 				}
-				
 			}
 		});
 		
@@ -165,9 +164,6 @@ public class CadastroAlunos extends JInternalFrame {
 					e1.printStackTrace();
 					new ErrorDialog("colunas obrigatórias sendo enviadas vazias").setVisible(true);
 				}
-				
-				
-				
 			}
 		});
 		

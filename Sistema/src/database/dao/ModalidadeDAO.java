@@ -13,7 +13,7 @@ public class ModalidadeDAO extends AbstractDAO {
 	
 	private String select = "select * from modalidades where modalidade=?";
 	private String selectAll = "select * from modalidades";
-	private String insert = "INSERT INTO modalidades(modalidade) VALUES (?)";
+	private String insert = "INSERT INTO modalidades(modalidade, frequencia, valorMensal) VALUES (?, ?, ?)";
 	private String delete = "delete from modalidades where modalidade = ?";
 	
 	private PreparedStatement pstSelect;
@@ -64,6 +64,8 @@ public class ModalidadeDAO extends AbstractDAO {
 	public void Insert(Object param) throws SQLException {		
 		Modalidade m = (Modalidade) param;
 		pstInsert.setString(1, m.getModalidade());
+		pstInsert.setInt(2, m.getFrequencia());
+		pstInsert.setDouble(3, m.getValorMensal());
 		pstInsert.execute();
 	}
 
@@ -71,6 +73,8 @@ public class ModalidadeDAO extends AbstractDAO {
 	public void Delete(Object param) throws SQLException {
 		Modalidade m = (Modalidade) param;
 		pstDelete.setString(1,  m.getModalidade());
+		pstInsert.setInt(2, m.getFrequencia());
+		pstInsert.setDouble(3, m.getValorMensal());
 		pstDelete.execute();		
 	}
 
