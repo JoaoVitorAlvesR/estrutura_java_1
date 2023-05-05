@@ -75,8 +75,8 @@ public class MenuWindow extends JFrame{
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new CadastroUsuario(conn).setVisible(true);
-						
+						CadastroUsuario cusuario = new CadastroUsuario(conn);
+						desktop.add(cusuario);						
 					}
 				});
 				mCadastroAlunos = new JMenuItem("Alunos");
@@ -85,8 +85,7 @@ public class MenuWindow extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						CadastroAlunos caluno =  new CadastroAlunos(conn);
-						desktop.add(caluno);
-						
+						desktop.add(caluno);				
 					}
 				});
 				
