@@ -3,6 +3,7 @@ package graphic;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -25,7 +26,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 
 
-public class CadastroUsuario extends JFrame {
+public class CadastroUsuario extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -36,14 +37,14 @@ public class CadastroUsuario extends JFrame {
 		this.conn = conn;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 320, 200);
+		setBounds(100, 100, 320, 170);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{75, 75, 75, 75, 0};
-		gbl_contentPane.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30};
+		gbl_contentPane.rowHeights = new int[]{5, 30, 5, 30, 30, 30, 30};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
@@ -67,7 +68,7 @@ public class CadastroUsuario extends JFrame {
 		gbc_btnNewButton.gridwidth = 2;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 0;
+		gbc_btnNewButton.gridy = 1;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnCriarUsurio = new JButton("Criar Usuário");
@@ -96,7 +97,7 @@ public class CadastroUsuario extends JFrame {
 		gbc_btnCriarUsurio.fill = GridBagConstraints.BOTH;
 		gbc_btnCriarUsurio.insets = new Insets(0, 0, 5, 0);
 		gbc_btnCriarUsurio.gridx = 2;
-		gbc_btnCriarUsurio.gridy = 0;
+		gbc_btnCriarUsurio.gridy = 1;
 		contentPane.add(btnCriarUsurio, gbc_btnCriarUsurio);
 		
 		JLabel lblNewLabel = new JLabel("Perfil:");
@@ -113,26 +114,6 @@ public class CadastroUsuario extends JFrame {
 		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 3;
 		contentPane.add(comboBox, gbc_comboBox);
-		
-		JButton btnCancelar = new JButton("Voltar");
-		btnCancelar.setAction(new AbstractAction("Voltar") {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.gridwidth = 4;
-		gbc_btnCancelar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnCancelar.insets = new Insets(0, 0, 5, 0);
-		gbc_btnCancelar.gridx = 0;
-		gbc_btnCancelar.gridy = 1;
-		contentPane.add(btnCancelar, gbc_btnCancelar);
 		
 		JLabel lblNewLabel_1 = new JLabel("Usuário:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -168,6 +149,11 @@ public class CadastroUsuario extends JFrame {
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 5;
 		contentPane.add(textField_1, gbc_textField_1);
+		
+		setIconifiable(true);
+		setClosable(true);
+		setVisible(true);
+		setTitle("Cadastro de Usuarios");
 	}
 
 }
