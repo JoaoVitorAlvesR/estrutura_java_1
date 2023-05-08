@@ -97,4 +97,13 @@ public class MatriculaModalidade {
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "MatriculaModalidade [codigoMatricula=" + codigoMatricula + ", modalidade=" + modalidade + ", graduacao="
+				+ graduacao + ", plano=" + plano + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + "]";
+	}
+
 }

@@ -37,7 +37,7 @@ public class CadastroModalidade extends JInternalFrame {
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		JComboBox<Integer> comboBox = new JComboBox<Integer>();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{115, 70, 80, 0};
@@ -89,11 +89,11 @@ public class CadastroModalidade extends JInternalFrame {
 		
 		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"- Selecione -"}));
-		comboBox.addItem(1);
-		comboBox.addItem(2);
-		comboBox.addItem(3);
-		comboBox.addItem(4);
-		comboBox.addItem(5);
+		comboBox.addItem("1 Aula");
+		comboBox.addItem("2 Aulas");
+		comboBox.addItem("3 Aulas");
+		comboBox.addItem("4 Aulas");
+		comboBox.addItem("5 Aulas");
 		
 		textField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();

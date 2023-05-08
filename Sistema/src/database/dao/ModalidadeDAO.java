@@ -53,7 +53,7 @@ public class ModalidadeDAO extends AbstractDAO {
 		ResultSet resultado = pstLocal.executeQuery();
 		while (resultado.next()) {
 			m = new Modalidade();
-			m.setModalidade(resultado.getString("usuario"));
+			m.setModalidade(resultado.getString("modalidade"));
 			listaRetorno.add(m);
 		}
 		
