@@ -1,6 +1,7 @@
 package database.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +13,11 @@ import database.model.MatriculaModalidade;
 
 public class MatriculaModalidadeDAO extends AbstractDAO {
 	
+	
+	
 	private String selectWhere = "select * from matriculas_modalidades where codigo_matricula = ?";
 	private String selectAll = "select * from matriculas_modalidades";
-	private String insert = "INSERT INTO matriculas_modalidades(modalidade) VALUES (?)";
+	private String insert = "INSERT INTO matriculas_modalidades(modalidade, graduacao, plano, data_inicio, data_fim, codigo_matricula) VALUES (?,?,?,?,?,?)";
 	private String update = "UPDATE matriculas_modalidades SET modalidade=?, graduacao=?, plano=?, data_inicio=?, data_fim=? WHERE codigo_matricula = ?";
 	private String delete = "delete from matriculas_modalidades where modalidade = ?";
 	
@@ -31,6 +34,8 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
 		pstUpdate = conn.prepareStatement(update);
 		pstDelete = conn.prepareStatement(delete);
 	}
+	
+	
 
 	@Override
 	public List<Object> SelectAll() throws SQLException {		
@@ -46,12 +51,11 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
 		if (param != null) {
 			m = (MatriculaModalidade) param;
 			pstLocal = pstSelect;
-			pstLocal.setInt(1, m.getCodigoMatricula());
 			pstLocal.setString(2, m.getModalidade());
 			pstLocal.setString(3, m.getGraduacao());
 			pstLocal.setString(4, m.getPlano());
-			pstLocal.setDate(5, m.getDataInicio());
-			pstLocal.setDate(6, m.getDataFim());
+			pstLocal.setDate(5, (Date) m.getDataInicio());
+			pstLocal.setDate(6, (Date) m.getDataFim());
 		}
 		else {
 			pstLocal = pstSelectAll;
@@ -80,8 +84,9 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
 		pstInsert.setString(1, m.getModalidade());
 		pstInsert.setString(2, m.getGraduacao());
 		pstInsert.setString(3, m.getPlano());
-		pstInsert.setDate(4, m.getDataInicio());
-		pstInsert.setDate(5, m.getDataFim());
+		pstInsert.setDate(4, (Date) m.getDataInicio());
+		pstInsert.setDate(5, (Date) m.getDataFim());
+		pstInsert.setInt(6, m.getCodigoMatricula());
 		pstInsert.execute();
 	}
 	
@@ -91,15 +96,14 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
 		pstUpdate.setString(1, m.getModalidade());
 		pstUpdate.setString(2, m.getGraduacao());
 		pstUpdate.setString(3, m.getPlano());
-		pstUpdate.setDate(4, m.getDataInicio());
-		pstUpdate.setDate(5, m.getDataFim());
+		pstUpdate.setDate(4, (Date) m.getDataInicio());
+		pstUpdate.setDate(5, (Date) m.getDataFim());
 		pstUpdate.execute();
 	}
 
 	@Override
 	public void Delete(Object param) throws SQLException {
 		MatriculaModalidade m = (MatriculaModalidade) param;
-		pstDelete.setInt(1,  m.getCodigoMatricula());
 		pstDelete.execute();		
 	}
 

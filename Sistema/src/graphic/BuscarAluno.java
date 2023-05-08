@@ -87,23 +87,23 @@ public class BuscarAluno extends JFrame {
 			        Statement stmt = conn.createStatement();
 			        ResultSet rs = stmt.executeQuery("SELECT * FROM alunos WHERE aluno iLIKE '%" + nome + "%'");
 
-			        DefaultTableModel model = new DefaultTableModel(new String[] {"Nome", "CPF", "Idade", "Telefone"}, 0);
+			        DefaultTableModel model = new DefaultTableModel(new String[] {"Nome", "CPF", "Codigo", "Telefone"}, 0);
 			        while(rs.next()) {
-			            Date birthdate = rs.getDate("data_nascimento");
-			            Calendar calendar = Calendar.getInstance();
-			            calendar.setTime(birthdate);
-			            int birthYear = calendar.get(Calendar.YEAR);
-			            int birthMonth = calendar.get(Calendar.MONTH);
-			            int birthDay = calendar.get(Calendar.DAY_OF_MONTH);
-			            calendar.setTime(new Date());
-			            int currentYear = calendar.get(Calendar.YEAR);
-			            int currentMonth = calendar.get(Calendar.MONTH);
-			            int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-			            int age = currentYear - birthYear;
-			            if (currentMonth < birthMonth || (currentMonth == birthMonth && currentDay < birthDay)) {
-			                age--;
-			            }
-			            model.addRow(new Object[] {rs.getString("aluno"), rs.getString("cpf"), age, rs.getString("telefone")});
+//			            Date birthdate = rs.getDate("data_nascimento");
+//			            Calendar calendar = Calendar.getInstance();
+//			            calendar.setTime(birthdate);
+//			            int birthYear = calendar.get(Calendar.YEAR);
+//			            int birthMonth = calendar.get(Calendar.MONTH);
+//			            int birthDay = calendar.get(Calendar.DAY_OF_MONTH);
+//			            calendar.setTime(new Date());
+//			            int currentYear = calendar.get(Calendar.YEAR);
+//			            int currentMonth = calendar.get(Calendar.MONTH);
+//			            int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+//			            int age = currentYear - birthYear;
+//			            if (currentMonth < birthMonth || (currentMonth == birthMonth && currentDay < birthDay)) {
+//			                age--;
+//			            }
+			            model.addRow(new Object[] {rs.getString("aluno"), rs.getString("cpf"), rs.getInt("codigo_aluno"), rs.getString("telefone")});
 			        }
 
 			        JTable table = new JTable(model);

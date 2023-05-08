@@ -5,14 +5,32 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.dao.MatriculaDAO;
+import database.dao.MatriculaModalidadeDAO;
+import database.dao.ModalidadeDAO;
+import database.model.MatriculaModalidade;
+import database.model.MatriculaModel;
+import database.model.Modalidade;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
@@ -22,8 +40,10 @@ public class AdicionarModalidade extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private Connection conn;
+	
+	
 
-	public AdicionarModalidade(Connection conn) {
+	public AdicionarModalidade(Connection conn, int codigoAluno) {
 		this.conn = conn;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -39,7 +59,21 @@ public class AdicionarModalidade extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
+		JComboBox<String> comboBox = new JComboBox<String>();
+		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		JComboBox<String> comboBox_2 = new JComboBox<String>();
+		
+		
 		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.setAction(new AbstractAction("Voltar") {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
+		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton.gridwidth = 2;
@@ -49,6 +83,57 @@ public class AdicionarModalidade extends JFrame {
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Salvar");
+		btnNewButton_1.setAction(new AbstractAction("Salvar") {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+			try {
+				MatriculaModalidadeDAO dao = new MatriculaModalidadeDAO(conn);
+				MatriculaModalidade m = new MatriculaModalidade();
+				
+				MatriculaDAO matriculaDao = new MatriculaDAO(conn);
+				MatriculaModel mm = new MatriculaModel();
+				mm.setCodigo_aluno(codigoAluno);
+				
+				List<Object> listMatricula = matriculaDao.Select(mm);
+				mm = (MatriculaModel) listMatricula.get(0);
+								
+				m.setCodigoMatricula(mm.getCodigo_matricula());
+;				
+				m.setModalidade(comboBox.getSelectedItem().toString());
+				m.setGraduacao(comboBox_1.getSelectedItem().toString());
+				m.setPlano(comboBox_2.getSelectedItem().toString());
+				
+				SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+				String dateInStringIni = textField.getText();
+				Date dateIni = new Date();
+				
+				String dateInStringFim = textField_1.getText();
+				//Date dateFim = new Date();
+				try {
+					dateIni = (Date) formatter.parse(dateInStringIni);
+					//dateFim = (Date) formatter.parse(dateInStringFim);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				m.setDataInicio(textField.getText().isEmpty()?null:new java.sql.Date(dateIni.getTime()));
+				//m.setDataFim(textField_1.getText().isEmpty()?null:new java.sql.Date(dateFim.getTime()));
+			    				
+				dao.Insert(m);
+				new ConfirmaSalvar().setVisible(true);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				new ErrorDialog("").setVisible(true);
+			}
+			
+			}
+		});
+		
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton_1.gridwidth = 2;
@@ -65,8 +150,29 @@ public class AdicionarModalidade extends JFrame {
 		gbc_lblNewLabel.gridy = 3;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"- Selecione -"}));
+		ModalidadeDAO dao = null;
+		
+		try {
+			dao = new ModalidadeDAO(conn);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		List<Object> Modalidades = new ArrayList<>();
+		try {
+			Modalidades = dao.SelectAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		
+		for(int i=0; i< Modalidades.size(); i++) {
+			Modalidade modalidade = (Modalidade) Modalidades.get(i);
+			comboBox.addItem(modalidade.getModalidade());	
+		}
+		
 		
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 4;
@@ -84,7 +190,7 @@ public class AdicionarModalidade extends JFrame {
 		gbc_lblNewLabel_1.gridy = 4;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
+
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"- Selecione -"}));
 		comboBox_1.addItem("Iniciante");
 		comboBox_1.addItem("Intermediário");
@@ -106,7 +212,7 @@ public class AdicionarModalidade extends JFrame {
 		gbc_lblNewLabel_2.gridy = 5;
 		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JComboBox<String> comboBox_2 = new JComboBox<String>();
+		
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"- Selecione -"}));
 		comboBox_2.addItem("Semanal");
 		comboBox_2.addItem("Mensal");
@@ -115,6 +221,7 @@ public class AdicionarModalidade extends JFrame {
 		comboBox_2.addItem("Semestral");
 		comboBox_2.addItem("Anual");
 		
+
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 		gbc_comboBox_2.gridwidth = 4;
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 0);
